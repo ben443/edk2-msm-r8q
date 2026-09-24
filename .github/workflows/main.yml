@@ -30,21 +30,21 @@ jobs:
           - nabu
           - vayu-huaxing
           - vayu-tianma
-          - cepheus
-          - hotdog
-          - guacamole
-          - guacamoleb
+         # - cepheus
+       #   - hotdog
+          #- guacamole
+      #    - guacamoleb
           # sdm845
-          - fajita
-          - beryllium-ebbg
-          - beryllium-tianma
-          - polaris
+         # - fajita
+        #  - beryllium-ebbg
+        #  - beryllium-tianma
+          # polaris
           - perseus
           # sm7325
-          - mona
-          - lisa
+         # - mona
+          - r8q
           # msm8998
-          - cheeseburger
+         # - cheeseburger
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
