@@ -25,11 +25,11 @@ jobs:
       matrix:
         device:
           # sm8150
-          - mh2lm
-          - betalm
-          - nabu
-          - vayu-huaxing
-          - vayu-tianma
+         # - mh2lm
+        #  - betalm
+        #  - nabu
+          #- vayu-huaxing
+        #  - vayu-tianma
          # - cepheus
        #   - hotdog
           #- guacamole
@@ -39,7 +39,7 @@ jobs:
         #  - beryllium-ebbg
         #  - beryllium-tianma
           # polaris
-          - perseus
+          #- perseus
           # sm7325
          # - mona
           - r8q
