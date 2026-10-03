@@ -57,6 +57,6 @@ FILE FREEFORM = 7E374E25-8E01-4FEE-87F2-390C23C606CD {
 
 // Mainline device tree blob
 FILE FREEFORM = 25462CDA-221F-47DF-9667-621B8697A2E5 {
-    SECTION RAW = r8q.dtb
-    SECTION UI = "r8q.dtb"
+    SECTION RAW = am8250-samsung-r8q.dtb
+    SECTION UI = "am8250-samsung-r8q.dtb"
 }
