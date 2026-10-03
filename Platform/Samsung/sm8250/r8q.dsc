@@ -21,6 +21,9 @@
   gQcomTokenSpaceGuid.PcdMipiFrameBufferHeight|2400
   gQcomTokenSpaceGuid.PcdMipiFrameBufferAddress|0x9C000000
 
+  # Prefer mainline Linux FDT over the ABL-provided ACPI/DTB handoff.
+  gEfiMdeModulePkgTokenSpaceGuid.PcdInstallAcpiSdtProtocol|FALSE
+
   # Simple Init
   gSimpleInitTokenSpaceGuid.PcdGuiDefaultDPI|355
 
