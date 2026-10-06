@@ -27,9 +27,8 @@ _StackSize:
   .quad FixedPcdGet32(PcdPrePiStackSize)
 
 _ModuleEntryPoint:
-  /* Ignore the ABL-provided x0 FDT pointer and prefer the embedded DTB. */
-  /* mov x10, FixedPcdGet64 (PcdDeviceTreeStore) */
-  /* str x0, [x10] // oh my fdt */
+  mov x10, FixedPcdGet64 (PcdDeviceTreeStore)
+  str x0, [x10] // oh my fdt
 
   mov x0, #0
   mov x1, #0
