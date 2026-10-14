@@ -287,6 +287,36 @@ VOID EFIAPI AddOutput(IN EFI_HANDLE Handle, IN CONST CHAR16 *ReportText)
        ReportText));
 }
 
+/**
+  This CALLBACK_FUNCTION retrieves the EFI_DEVICE_PATH_PROTOCOL from the
+  handle, and adds it to ConIn.
+**/
+STATIC
+VOID EFIAPI AddInput(IN EFI_HANDLE Handle, IN CONST CHAR16 *ReportText)
+{
+  EFI_STATUS                Status;
+  EFI_DEVICE_PATH_PROTOCOL *DevicePath;
+
+  DevicePath = DevicePathFromHandle(Handle);
+  if (DevicePath == NULL) {
+    DEBUG(
+        (EFI_D_ERROR, "%a: %s: handle %p: device path not found\n",
+         __FUNCTION__, ReportText, Handle));
+    return;
+  }
+
+  Status = EfiBootManagerUpdateConsoleVariable(ConIn, DevicePath, NULL);
+  if (EFI_ERROR(Status)) {
+    DEBUG(
+        (EFI_D_ERROR, "%a: %s: adding to ConIn: %r\n", __FUNCTION__,
+         ReportText, Status));
+    return;
+  }
+
+  DEBUG(
+      (EFI_D_VERBOSE, "%a: %s: added to ConIn\n", __FUNCTION__, ReportText));
+}
+
 STATIC
 UINT16
 PlatformRegisterFvBootOption(
@@ -516,21 +546,10 @@ VOID EFIAPI PlatformBootManagerBeforeConsole(VOID)
   EfiBootManagerUpdateConsoleVariable(
       ConIn, (EFI_DEVICE_PATH_PROTOCOL *)&mUsbKeyboard, NULL);
 
-  EFI_HANDLE *              handles;
-  UINTN                     NoHandles;
-  EFI_DEVICE_PATH_PROTOCOL *devicehandle;
-  /*CHAR16 *devicepathtxt;*/
-  // EfiBootManagerUpdateConsoleVariable(ConIn,
-  //  (EFI_DEVICE_PATH_PROTOCOL*)&gQcomKeypadDeviceGuid, NULL);
-  gBS->LocateHandleBuffer(
-      ByProtocol, &gEfiSimpleTextInputExProtocolGuid, NULL, &NoHandles,
-      &handles);
-  devicehandle = DevicePathFromHandle(handles[1]);
-  EfiBootManagerUpdateConsoleVariable(
-      ConIn, devicehandle, NULL); /*
-            devicepathtxt = ConvertDevicePathToText(devicehandle,TRUE,TRUE);
-            DEBUG((DEBUG_ERROR,"There are %s handles\n",devicepathtxt));
-            ASSERT(0);*/
+  //
+  // Add every text input device, including the platform buttons, to ConIn.
+  //
+  FilterAndProcess(&gEfiSimpleTextInputExProtocolGuid, NULL, AddInput);
 
   //
   // Add the hardcoded serial console device path to ConIn, ConOut, ErrOut.

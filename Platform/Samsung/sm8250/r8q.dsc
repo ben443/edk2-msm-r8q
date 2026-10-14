@@ -8,6 +8,7 @@
   SUPPORTED_ARCHITECTURES        = AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
+  DEFINE SECURE_BOOT_ENABLE      = FALSE
   FLASH_DEFINITION               = Platform/Qualcomm/sm8250/sm8250.fdf
   DEVICE_DXE_FV_COMPONENTS       = Platform/Samsung/sm8250/r8q.fdf.inc
 
